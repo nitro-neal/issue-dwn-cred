@@ -1,0 +1,78 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 20px;
+  color: #333;
+}
+
+/* Headings */
+h1 {
+  font-size: 32px; /* Large for main titles */
+}
+
+h2 {
+  font-size: 28px; /* Slightly smaller */
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px; /* Smallest heading */
+}
+
+/* Paragraph */
+p {
+  font-size: 16px; /* Comfortable reading size for most users */
+  margin-bottom: 20px; /* Adds space after paragraphs */
+}
+
+/* Links */
+a {
+  color: #0077cc; /* A standard link color */
+  text-decoration: none; /* Removes underline */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover for better usability */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
