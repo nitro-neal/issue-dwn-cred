@@ -5,7 +5,6 @@ import { VerifiableCredential, PresentationExchange } from "@web5/credentials";
 import { DidKeyMethod } from "@web5/dids";
 
 const issuerDid = await DidKeyMethod.create();
-const subjectDid = await DidKeyMethod.create();
 
 class TBDCredential {
   constructor(userName) {
@@ -28,14 +27,14 @@ app.get("/issue-credential", (req, res) => {
 });
 
 app.post("/issue-credential", async (req, res) => {
-  // TODO: Get subject name from request body
+  const subjectDid = req.body.subjectDid;
+
   const vc = await VerifiableCredential.create({
     type: "TBDCredential",
     issuer: issuerDid.did,
-    subject: subjectDid.did,
+    subject: subjectDid,
     data: new TBDCredential("Biell"),
   });
-
   const signedVcJwt = await vc.sign({ did: issuerDid });
 
   res.json({ vcJwt: signedVcJwt });
