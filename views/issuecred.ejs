@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="css/base.css">
-      <title>
-         <%= title %>
-      </title>
-   </head>
-   <body>
-      <main>
-         <h1>Issue TBD Credential Wallet Webview</h1>
-         <div>
-            <h3>Did for credential:</h3>
-            <div id="didResponse"></div>
-         </div>
-         <button onclick="requestDid()">Request DID</button>
-         <button onclick="issueCred()">Issue Credential</button>
-         <script type="module" src="/js/issuecred.js"></script>
-         <script type="module" src="/js/utils/error.js"></script>
-      </main>
-   </body>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <main>
+        <h1>Issue TBD Credential Wallet Webview</h1>
+        <div id="didResponse"></div>
+        <button onclick="requestDid()">Issue Credential</button>
+    </main>
+    <script type="module" src="/js/utils/error.js"></script>
+    <script type="module" src="/js/issuecred.js"></script>
+</body>
+
 </html>
