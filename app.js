@@ -12,12 +12,23 @@ class TBDCredential {
   }
 }
 
+class AcmeCredential {
+  constructor(firstName, lastName, dob, address) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dob = dob;
+    this.address = address;
+  }
+}
+
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.static(join(process.cwd(), "public")));
+app.use(express.urlencoded({ extended: true }));
 
+// ISSUER 1
 app.get("/", (req, res) => {
   res.render("index", { title: "TBDIssuer" });
 });
@@ -40,18 +51,46 @@ app.post("/issue-credential", async (req, res) => {
   res.json({ vcJwt: signedVcJwt });
 });
 
-// logging
+// ISSUER 2
+app.get("/issuer-2", (req, res) => {
+  res.render("issuer2Home");
+});
+
+app.get("/issue-credential-2", (req, res) => {
+  res.render("issuer2Form");
+});
+
+app.post("/issue-credential-2", async (req, res) => {
+
+  console.log("INSIDE")
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const dob = req.body.dob;
+  const address = req.body.address;
+
+  //TODO: Get Correct Did for subject
+  const vc = await VerifiableCredential.create({
+    type: "AcmeCredential",
+    issuer: issuerDid.did,
+    subject: issuerDid.did,
+    data: new AcmeCredential(firstName, lastName, dob, address)
+  });
+
+  const signedVcJwt = await vc.sign({ did: issuerDid });
+
+  res.json({ vcJwt: signedVcJwt });
+});
+
+// OTHER
 app.post("/log", (req) => {
   console.log("Client side log:", req.body);
 });
 
-// error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
-// Start the server
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
