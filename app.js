@@ -38,17 +38,20 @@ app.get("/issue-credential", (req, res) => {
 });
 
 app.post("/issue-credential", async (req, res) => {
-  const subjectDid = req.body.subjectDid;
+  const subjectDids = JSON.parse(req.body.subjectDids);
 
-  const vc = await VerifiableCredential.create({
-    type: "TBDCredential",
-    issuer: issuerDid.did,
-    subject: subjectDid,
-    data: new TBDCredential("Biell"),
+  const promises = subjectDids.map(async (subjectDid) => {
+    const vc = await VerifiableCredential.create({
+      type: "TBDCredential",
+      issuer: issuerDid.did,
+      subject: subjectDid,
+      data: new TBDCredential("Biell"),
+    });
+    return vc.sign({ did: issuerDid });
   });
-  const signedVcJwt = await vc.sign({ did: issuerDid });
 
-  res.json({ vcJwt: signedVcJwt });
+  const vcJwts = await Promise.all(promises);
+  res.json({ vcJwts: vcJwts });
 });
 
 // ISSUER 2
@@ -61,8 +64,6 @@ app.get("/issue-credential-2", (req, res) => {
 });
 
 app.post("/issue-credential-2", async (req, res) => {
-
-  console.log("INSIDE")
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const dob = req.body.dob;
@@ -73,7 +74,7 @@ app.post("/issue-credential-2", async (req, res) => {
     type: "AcmeCredential",
     issuer: issuerDid.did,
     subject: issuerDid.did,
-    data: new AcmeCredential(firstName, lastName, dob, address)
+    data: new AcmeCredential(firstName, lastName, dob, address),
   });
 
   const signedVcJwt = await vc.sign({ did: issuerDid });

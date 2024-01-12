@@ -3,7 +3,7 @@ import { sendLogServerSide } from "./utils/logger.js";
 // responses from native app
 document.addEventListener("DidResponse", function (event) {
   sendLogServerSide(event.detail);
-  const subjectDid = event.detail;
+  const subjectDids = event.detail;
 
   fetch("/issue-credential", {
     method: "POST",
@@ -11,7 +11,7 @@ document.addEventListener("DidResponse", function (event) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      subjectDid,
+      subjectDids,
     }),
   })
     .then((response) => response.json())
