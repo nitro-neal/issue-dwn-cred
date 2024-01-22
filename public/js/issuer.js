@@ -38,7 +38,7 @@ document.addEventListener("PresentationSubmission", async function (event) {
   await sendLogServerSide("Received PresentationSubmission listener event");
   await sendLogServerSide(presentationSubmission);
 
-  const button = document.getElementById("requestCredentialsButton");
+  const button = document.getElementById("issueDidsButton");
   button.classList.remove("disabled");
 
   await fetch("/presentation-submission", {
