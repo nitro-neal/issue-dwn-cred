@@ -1,6 +1,6 @@
-import { sendLogServerSide } from "./logger";
+import { sendLogServerSide } from "./logger.js";
 
-window.onerror = function (message, source, lineno, colno, error) {
+window.onerror = async function (message, source, lineno, colno, error) {
   // Format the error information
   const errorData = {
     message,
@@ -11,7 +11,7 @@ window.onerror = function (message, source, lineno, colno, error) {
   };
 
   // Call your log function
-  sendLogServerSide(errorData);
+  await sendLogServerSide(errorData);
 
   // Prevent the default browser error handler
   return true;

@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function generateQRCode(text) {
+  // @ts-expect-error globally imported
+  // eslint-disable-next-line no-undef
   new QRCode(document.getElementById("qrcode"), text);
 }
 
-window.generateQRCode = generateQRCode;
+// bind to global var
+window["generateQRCode"] = generateQRCode;
