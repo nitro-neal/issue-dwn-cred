@@ -5,23 +5,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KYC Application Form</title>
-  <link rel="stylesheet" href="/css/issuer.css">
+  <link rel="stylesheet" href="/css/issuer.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"
+    rel="stylesheet" />
 </head>
 
 <body>
-
-  <div class="container">
-    <h2>Application for Duff Bank</h2>
-    <div class="form-group">
-      <p>In order to process your application please provide a Drivers License and Passport credential from your digital
-        wallet.</p>
-    </div>
-    <button class="btn" id="requestCredentialsButton" onclick="requestCredentials()">Provide First
-      Name</button>
-    <button class="btn disabled" disabled id="issueDidsButton" onclick="requestDid()">Issue Credential</button>
+  <div class="logo">Duff Bank</div>
+  <div>
+    <p>Application For</p>
+    <h1>KYC Credential</h1>
   </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email">
+  </div>
+  <div class="divider-20"></div>
+  <div>
+    <strong>Credentials</strong>
+    <p>
+      In order to process your application please provide a Drivers License
+      and Passport credential from your digital wallet.
+    </p>
+  </div>
+  <button id="driversLicense" onclick="attachCredential('driversLicense')">
+    Attach Drivers License
+  </button>
+  <div id="driversLicenseAttached" class="attached-credential">
+    <div class="paperclip">
+      <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M4.62501 15.4134C3.5279 15.4134 2.59497 15.0291 1.82622 14.2603C1.05747 13.4916 0.673096 12.5587 0.673096 11.4616V3.35576C0.673096 2.56646 0.954139 1.89077 1.51623 1.32869C2.0783 0.766618 2.75399 0.48558 3.54329 0.48558C4.33259 0.48558 5.00828 0.766618 5.57035 1.32869C6.13243 1.89077 6.41346 2.56646 6.41346 3.35576V10.6683C6.41346 11.169 6.24056 11.5923 5.89476 11.9381C5.54895 12.2838 5.12563 12.4567 4.62481 12.4567C4.12398 12.4567 3.70073 12.2838 3.35506 11.9381C3.0094 11.5923 2.83656 11.169 2.83656 10.6683V3.35576H3.73077V10.6683C3.73077 10.9216 3.81647 11.134 3.98787 11.3054C4.15927 11.4768 4.37165 11.5625 4.62501 11.5625C4.87838 11.5625 5.09076 11.4768 5.26216 11.3054C5.43356 11.134 5.51926 10.9216 5.51926 10.6683V3.35576C5.51926 2.80248 5.32819 2.33484 4.94605 1.95282C4.56391 1.5708 4.09612 1.37979 3.54267 1.37979C2.98923 1.37979 2.52165 1.5708 2.13991 1.95282C1.75818 2.33484 1.56732 2.80248 1.56732 3.35576V11.4616C1.56732 12.3058 1.86588 13.0265 2.46299 13.6236C3.0601 14.2207 3.78078 14.5192 4.62501 14.5192C5.46925 14.5192 6.18993 14.2207 6.78704 13.6236C7.38415 13.0265 7.68271 12.3058 7.68271 11.4616V3.35576H8.57693V11.4616C8.57693 12.5587 8.19256 13.4916 7.42381 14.2603C6.65506 15.0291 5.72213 15.4134 4.62501 15.4134Z"
+          fill="white" />
+      </svg>
+    </div>
+    <p id="attached-text">Driver License attached</p>
+    <div class="button-row">
+      <div class="button" onclick="detachCredential('driversLicense')">Remove</div>
+    </div>
+  </div>
+  <button id="passport" onclick="attachCredential('passport')">
+    Attach Passport
+  </button>
+  <div id="passportAttached" class="attached-credential">
+    <div class="paperclip">
+      <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M4.62501 15.4134C3.5279 15.4134 2.59497 15.0291 1.82622 14.2603C1.05747 13.4916 0.673096 12.5587 0.673096 11.4616V3.35576C0.673096 2.56646 0.954139 1.89077 1.51623 1.32869C2.0783 0.766618 2.75399 0.48558 3.54329 0.48558C4.33259 0.48558 5.00828 0.766618 5.57035 1.32869C6.13243 1.89077 6.41346 2.56646 6.41346 3.35576V10.6683C6.41346 11.169 6.24056 11.5923 5.89476 11.9381C5.54895 12.2838 5.12563 12.4567 4.62481 12.4567C4.12398 12.4567 3.70073 12.2838 3.35506 11.9381C3.0094 11.5923 2.83656 11.169 2.83656 10.6683V3.35576H3.73077V10.6683C3.73077 10.9216 3.81647 11.134 3.98787 11.3054C4.15927 11.4768 4.37165 11.5625 4.62501 11.5625C4.87838 11.5625 5.09076 11.4768 5.26216 11.3054C5.43356 11.134 5.51926 10.9216 5.51926 10.6683V3.35576C5.51926 2.80248 5.32819 2.33484 4.94605 1.95282C4.56391 1.5708 4.09612 1.37979 3.54267 1.37979C2.98923 1.37979 2.52165 1.5708 2.13991 1.95282C1.75818 2.33484 1.56732 2.80248 1.56732 3.35576V11.4616C1.56732 12.3058 1.86588 13.0265 2.46299 13.6236C3.0601 14.2207 3.78078 14.5192 4.62501 14.5192C5.46925 14.5192 6.18993 14.2207 6.78704 13.6236C7.38415 13.0265 7.68271 12.3058 7.68271 11.4616V3.35576H8.57693V11.4616C8.57693 12.5587 8.19256 13.4916 7.42381 14.2603C6.65506 15.0291 5.72213 15.4134 4.62501 15.4134Z"
+          fill="white" />
+      </svg>
+    </div>
+    <p id="attached-text">Passport attached</p>
+    <div class="button-row">
+      <div class="button" onclick="detachCredential('passport')">Remove</div>
+    </div>
+  </div>
+  <div class="divider-20"></div>
+  <button disabled id="issueDidsButton" onclick="requestDid()">
+    Next
+  </button>
   <script type="module" src="/js/issuer.js"></script>
   <script type="module" src="/js/utils/error.js"></script>
+  <script type="module" src="/node_modules/@web5/credentials/dist/esm/index.js"></script>
 </body>
 
 </html>

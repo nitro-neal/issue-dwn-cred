@@ -1,9 +1,9 @@
 :root {
-  --white: hsl(0, 0%, 100%);
-  --light-gray: hsl(212, 45%, 89%);
+  --teal: #008c8c;
+  --dark-teal: #005050;
   --grayish-blue: hsl(220, 15%, 55%);
   --dark-blue: hsl(218, 44%, 22%);
-  --font: "Outfit", sans-serif;
+  --font: sans-serif;
 }
 
 *,
@@ -15,7 +15,7 @@
 body {
   -webkit-font-smoothing: antialiased;
   margin: 0;
-  background-color: var(--light-gray);
+  background-color: var(--teal);
   font-family: var(--font);
   height: 100vh;
   display: grid;
@@ -23,7 +23,7 @@ body {
 }
 
 .card {
-  background-color: var(--white);
+  background-color: #fff;
   border-radius: 20px;
   text-align: center;
   width: 18em;
@@ -62,13 +62,13 @@ body {
 
 .link {
   padding: 1rem 0;
-  color: var(--grayish-blue);
+  color: var(--dark-teal);
   font-size: 11px;
   text-align: center;
 }
 
 .link a {
-  color: hsl(228, 45%, 60%);
+  color: var(--dark-teal);
 }
 
 .img-wrapper::before,
